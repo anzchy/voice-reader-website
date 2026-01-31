@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Voice Reader</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #FAF9F5;
+            --surface: #F5F4F0;
+            --primary: #141413;
+            --body: #30302E;
+            --secondary: #5E5D59;
+            --accent: #DA7756;
+            --border: #E8E6DC;
+            --dark: #191918;
+            --radius-leaf: 0 16px 16px 16px;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--body);
+            line-height: 1.7;
+        }
+
+        /* Header */
+        .header {
+            background: var(--accent);
+            color: white;
+            padding: 80px 24px 60px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-family: Georgia, serif;
+            font-size: 40px;
+            font-weight: 400;
+            margin-bottom: 8px;
+            letter-spacing: -0.02em;
+        }
+
+        .header .subtitle {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        .header .update-date {
+            font-size: 14px;
+            opacity: 0.7;
+            margin-top: 16px;
+        }
+
+        /* Navigation */
+        .back-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(250, 249, 245, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            padding: 16px 24px;
+            z-index: 100;
+        }
+
+        .back-nav a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--secondary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .back-nav a:hover { color: var(--accent); }
+
+        /* Content */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 48px 24px 80px;
+        }
+
+        /* Summary Box */
+        .summary-box {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-leaf);
+            padding: 28px;
+            margin-bottom: 48px;
+        }
+
+        .summary-box h2 {
+            font-family: Georgia, serif;
+            font-size: 18px;
+            font-weight: 400;
+            color: var(--accent);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .summary-box ul {
+            list-style: none;
+        }
+
+        .summary-box li {
+            padding: 10px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            color: var(--body);
+        }
+
+        .summary-box li::before {
+            content: '✓';
+            width: 22px;
+            height: 22px;
+            min-width: 22px;
+            background: var(--accent);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 600;
+            margin-top: 1px;
+        }
+
+        /* Sections */
+        section {
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            font-family: Georgia, serif;
+            font-size: 24px;
+            font-weight: 400;
+            color: var(--primary);
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        h3 {
+            font-size: 17px;
+            font-weight: 600;
+            color: var(--primary);
+            margin: 24px 0 12px;
+        }
+
+        p {
+            color: var(--secondary);
+            margin-bottom: 16px;
+        }
+
+        ul, ol {
+            color: var(--secondary);
+            padding-left: 24px;
+            margin-bottom: 16px;
+        }
+
+        li { margin-bottom: 8px; }
+
+        /* Highlight Box */
+        .highlight-box {
+            background: rgba(218, 119, 86, 0.08);
+            border-left: 4px solid var(--accent);
+            padding: 20px 24px;
+            margin: 24px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .highlight-box p {
+            margin: 0;
+            color: var(--body);
+        }
+
+        /* Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+
+        th, td {
+            padding: 12px 16px;
+            text-align: left;
+            border: 1px solid var(--border);
+        }
+
+        th {
+            background: var(--surface);
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        td { color: var(--secondary); }
+
+        /* Contact Box */
+        .contact-box {
+            background: var(--dark);
+            border-radius: var(--radius-leaf);
+            padding: 32px;
+            margin-top: 48px;
+            color: white;
+        }
+
+        .contact-box h3 {
+            color: white;
+            margin-top: 0;
+            font-family: Georgia, serif;
+            font-weight: 400;
+        }
+
+        .contact-box p {
+            color: rgba(255,255,255,0.7);
+        }
+
+        .contact-box a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .contact-box a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+            padding: 24px;
+            text-align: center;
+            font-size: 13px;
+            color: var(--secondary);
+        }
+
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        @media (max-width: 600px) {
+            .header { padding: 100px 20px 40px; }
+            .header h1 { font-size: 32px; }
+            .container { padding: 32px 20px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Back Navigation -->
+    <div class="back-nav">
+        <a href="index.html">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+            Back to Home
+        </a>
+    </div>
+
+    <!-- Header -->
+    <div class="header">
+        <h1>Privacy Policy</h1>
+        <div class="subtitle">Voice Reader iOS App</div>
+        <div class="update-date">Last Updated: January 27, 2026</div>
+    </div>
+
+    <!-- Content -->
+    <div class="container">
+        <!-- Summary -->
+        <div class="summary-box">
+            <h2>📋 Quick Summary</h2>
+            <ul>
+                <li>Voice Reader does not collect personal data</li>
+                <li>All your books and reading data stay on your device</li>
+                <li>Text is sent to TTS services only for audio generation</li>
+                <li>You control which TTS provider is used</li>
+                <li>No accounts, no tracking, no ads</li>
+            </ul>
+        </div>
+
+        <!-- Introduction -->
+        <section>
+            <h2>Introduction</h2>
+            <p>Voice Reader ("we", "our", or "the app") is committed to protecting your privacy. This Privacy Policy explains how we handle information when you use our iOS application.</p>
+            <p>Voice Reader is an EPUB reader with text-to-speech functionality. The app is designed with privacy in mind—your reading data stays on your device.</p>
+        </section>
+
+        <!-- Data Collection -->
+        <section>
+            <h2>Information We Collect</h2>
+
+            <h3>Data Stored Locally on Your Device</h3>
+            <p>The following data is stored only on your device and is never transmitted to us:</p>
+            <ul>
+                <li><strong>Books:</strong> EPUB files you import into the app</li>
+                <li><strong>Reading Progress:</strong> Current position, bookmarks, and highlights</li>
+                <li><strong>App Settings:</strong> TTS configuration, reading preferences</li>
+                <li><strong>Notes:</strong> Any notes you add to your books</li>
+            </ul>
+
+            <h3>Data We Do NOT Collect</h3>
+            <ul>
+                <li>Personal information (name, email, etc.)</li>
+                <li>Device identifiers</li>
+                <li>Usage analytics or tracking data</li>
+                <li>Location data</li>
+            </ul>
+        </section>
+
+        <!-- Third-Party Services -->
+        <section>
+            <h2>Third-Party TTS Services</h2>
+
+            <div class="highlight-box">
+                <p><strong>Important:</strong> When you use text-to-speech, the text content is sent to your configured TTS provider to generate audio. This is necessary for the app's core functionality.</p>
+            </div>
+
+            <p>Voice Reader supports multiple TTS providers. You choose which one to use:</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Provider</th>
+                        <th>Data Sent</th>
+                        <th>Privacy Policy</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Microsoft Azure Speech</td>
+                        <td>Text content for audio synthesis</td>
+                        <td><a href="https://privacy.microsoft.com" target="_blank">Microsoft Privacy</a></td>
+                    </tr>
+                    <tr>
+                        <td>Speechify API</td>
+                        <td>Text content for audio synthesis</td>
+                        <td><a href="https://speechify.com/privacy" target="_blank">Speechify Privacy</a></td>
+                    </tr>
+                    <tr>
+                        <td>Piper (Self-hosted)</td>
+                        <td>Text to your own server</td>
+                        <td>Your server, your control</td>
+                    </tr>
+                    <tr>
+                        <td>Custom API</td>
+                        <td>Text to your configured endpoint</td>
+                        <td>Your responsibility</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>We recommend reviewing the privacy policy of your chosen TTS provider. You provide your own API credentials, and we do not have access to your TTS accounts.</p>
+        </section>
+
+        <!-- Data Storage -->
+        <section>
+            <h2>Data Storage & Security</h2>
+            <ul>
+                <li><strong>Local Storage:</strong> All app data is stored locally on your iOS device using standard iOS storage mechanisms.</li>
+                <li><strong>API Credentials:</strong> Your TTS API keys are stored securely using iOS Keychain or UserDefaults.</li>
+                <li><strong>No Cloud Sync:</strong> Voice Reader does not sync data to any cloud service.</li>
+                <li><strong>Device Security:</strong> Your data is protected by your device's security features (passcode, Face ID, etc.).</li>
+            </ul>
+        </section>
+
+        <!-- Your Rights -->
+        <section>
+            <h2>Your Rights & Data Control</h2>
+            <p>You have full control over your data:</p>
+            <ul>
+                <li><strong>View Data:</strong> All your data is visible within the app</li>
+                <li><strong>Delete Data:</strong> Delete individual books, notes, or the entire app</li>
+                <li><strong>Export:</strong> Your EPUB files remain in standard format</li>
+                <li><strong>Change TTS Provider:</strong> Switch providers anytime in Settings</li>
+            </ul>
+            <p>To delete all Voice Reader data, simply uninstall the app from your device.</p>
+        </section>
+
+        <!-- Children's Privacy -->
+        <section>
+            <h2>Children's Privacy</h2>
+            <p>Voice Reader does not knowingly collect any personal information from children. The app does not require account creation or collect user data.</p>
+        </section>
+
+        <!-- Changes -->
+        <section>
+            <h2>Changes to This Policy</h2>
+            <p>We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last Updated" date.</p>
+        </section>
+
+        <!-- Contact -->
+        <div class="contact-box">
+            <h3>Contact Us</h3>
+            <p>If you have any questions about this Privacy Policy, please contact us:</p>
+            <p>Email: <a href="mailto:anzchy@163.com">anzchy@163.com</a></p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p><a href="index.html">Voice Reader</a> · <a href="terms.html">Terms of Use</a> · <a href="support.html">Support</a></p>
+    </footer>
+</body>
+</html>

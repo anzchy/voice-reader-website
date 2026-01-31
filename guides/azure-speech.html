@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Azure Speech Setup Guide - Voice Reader</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #FAF9F5;
+            --surface: #F5F4F0;
+            --primary: #141413;
+            --body: #30302E;
+            --secondary: #5E5D59;
+            --accent: #DA7756;
+            --border: #E8E6DC;
+            --dark: #191918;
+            --info: #3B82F6;
+            --success: #22C55E;
+            --warning: #F59E0B;
+            --radius-leaf: 0 16px 16px 16px;
+            --radius-md: 12px;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--body);
+            line-height: 1.7;
+        }
+
+        .back-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(250, 249, 245, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            padding: 16px 24px;
+            z-index: 100;
+        }
+
+        .back-nav a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--secondary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .back-nav a:hover { color: var(--accent); }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #0078D4, #106EBE);
+            color: white;
+            padding: 120px 24px 60px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.15);
+            padding: 6px 14px;
+            border-radius: 100px;
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-family: Georgia, serif;
+            font-size: 40px;
+            font-weight: 400;
+            margin-bottom: 16px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            opacity: 0.9;
+            max-width: 600px;
+        }
+
+        /* Content */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 48px 24px 80px;
+        }
+
+        /* Info Box */
+        .info-box {
+            background: rgba(59, 130, 246, 0.08);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: var(--radius-leaf);
+            padding: 24px;
+            margin-bottom: 40px;
+            display: flex;
+            gap: 16px;
+        }
+
+        .info-box-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--info);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 20px;
+        }
+
+        .info-box h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .info-box p {
+            font-size: 14px;
+            color: var(--secondary);
+            margin: 0;
+        }
+
+        /* Steps */
+        .step {
+            margin-bottom: 48px;
+        }
+
+        .step-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: var(--accent);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .step-title {
+            font-family: Georgia, serif;
+            font-size: 24px;
+            font-weight: 400;
+            color: var(--primary);
+        }
+
+        .step-content {
+            padding-left: 56px;
+        }
+
+        .step-content p {
+            color: var(--secondary);
+            margin-bottom: 16px;
+        }
+
+        .step-content ul, .step-content ol {
+            color: var(--secondary);
+            padding-left: 20px;
+            margin-bottom: 16px;
+        }
+
+        .step-content li {
+            margin-bottom: 8px;
+        }
+
+        /* Code Block */
+        .code-block {
+            background: var(--dark);
+            border-radius: var(--radius-md);
+            padding: 20px 24px;
+            margin: 20px 0;
+            overflow-x: auto;
+        }
+
+        .code-block code {
+            color: #E8E6DC;
+            font-family: 'SF Mono', Monaco, monospace;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .code-block .comment { color: #8A8985; }
+        .code-block .string { color: #22C55E; }
+        .code-block .key { color: #F59E0B; }
+
+        /* Image Placeholder */
+        .image-placeholder {
+            background: var(--surface);
+            border: 2px dashed var(--border);
+            border-radius: var(--radius-md);
+            padding: 40px;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .image-placeholder span {
+            color: var(--secondary);
+            font-size: 14px;
+        }
+
+        /* Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+
+        th, td {
+            padding: 12px 16px;
+            text-align: left;
+            border: 1px solid var(--border);
+        }
+
+        th {
+            background: var(--surface);
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        td { color: var(--secondary); }
+
+        td code {
+            background: var(--surface);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        /* Warning Box */
+        .warning-box {
+            background: rgba(245, 158, 11, 0.08);
+            border-left: 4px solid var(--warning);
+            padding: 16px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .warning-box p {
+            margin: 0;
+            color: var(--body);
+            font-size: 14px;
+        }
+
+        /* Success Box */
+        .success-box {
+            background: rgba(34, 197, 94, 0.08);
+            border: 1px solid rgba(34, 197, 94, 0.2);
+            border-radius: var(--radius-leaf);
+            padding: 24px;
+            margin: 20px 0;
+        }
+
+        .success-box h4 {
+            color: var(--success);
+            font-size: 16px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .success-box p {
+            color: var(--secondary);
+            margin: 0;
+            font-size: 14px;
+        }
+
+        /* Voice List */
+        .voice-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .voice-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 16px;
+        }
+
+        .voice-card h5 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+
+        .voice-card code {
+            font-size: 11px;
+            color: var(--secondary);
+            background: var(--surface);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        .voice-card .badge {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            font-size: 10px;
+            padding: 2px 8px;
+            border-radius: 100px;
+            margin-top: 8px;
+        }
+
+        /* Links */
+        a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+            padding: 24px;
+            text-align: center;
+            font-size: 13px;
+            color: var(--secondary);
+        }
+
+        @media (max-width: 600px) {
+            .hero { padding: 100px 20px 40px; }
+            .hero h1 { font-size: 28px; }
+            .step-content { padding-left: 0; margin-top: 16px; }
+            .step-header { flex-direction: column; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+    <div class="back-nav">
+        <a href="../support.html">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+            Back to Support
+        </a>
+    </div>
+
+    <div class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">📖 Setup Guide</div>
+            <h1>Microsoft Azure Speech Setup</h1>
+            <p>Get your Azure Speech API key and start using high-quality HD neural voices in Voice Reader.</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Free Tier Info -->
+        <div class="info-box">
+            <div class="info-box-icon">💰</div>
+            <div>
+                <h3>Free Tier Available</h3>
+                <p>Azure Speech offers <strong>500,000 characters free per month</strong> on the standard tier. That's approximately 5-10 hours of audiobook listening. No credit card required for the free tier.</p>
+            </div>
+        </div>
+
+        <!-- Step 1 -->
+        <div class="step">
+            <div class="step-header">
+                <div class="step-number">1</div>
+                <h2 class="step-title">Create an Azure Account</h2>
+            </div>
+            <div class="step-content">
+                <p>If you don't have an Azure account, create one for free:</p>
+                <ol>
+                    <li>Go to <a href="https://azure.microsoft.com/free" target="_blank">azure.microsoft.com/free</a></li>
+                    <li>Click "Start free" or "Try Azure for free"</li>
+                    <li>Sign in with your Microsoft account or create a new one</li>
+                    <li>Complete the registration (phone verification required)</li>
+                </ol>
+                <div class="warning-box">
+                    <p><strong>Note:</strong> You may need to provide a credit card for verification, but you won't be charged for the free tier usage.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="step">
+            <div class="step-header">
+                <div class="step-number">2</div>
+                <h2 class="step-title">Create a Speech Resource</h2>
+            </div>
+            <div class="step-content">
+                <p>Create an Azure Speech service resource:</p>
+                <ol>
+                    <li>Go to the <a href="https://portal.azure.com" target="_blank">Azure Portal</a></li>
+                    <li>Click "Create a resource"</li>
+                    <li>Search for "Speech" and select "Speech" by Microsoft</li>
+                    <li>Click "Create"</li>
+                    <li>Fill in the required fields:
+                        <ul>
+                            <li><strong>Subscription:</strong> Select your subscription</li>
+                            <li><strong>Resource group:</strong> Create new or select existing</li>
+                            <li><strong>Region:</strong> Choose one close to you (see table below)</li>
+                            <li><strong>Name:</strong> Give it a name (e.g., "voice-reader-speech")</li>
+                            <li><strong>Pricing tier:</strong> Select "Free F0" or "Standard S0"</li>
+                        </ul>
+                    </li>
+                    <li>Click "Review + create", then "Create"</li>
+                </ol>
+
+                <div class="image-placeholder">
+                    <span>Screenshot: Azure Speech resource creation form</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="step">
+            <div class="step-header">
+                <div class="step-number">3</div>
+                <h2 class="step-title">Get Your API Key</h2>
+            </div>
+            <div class="step-content">
+                <p>Once your resource is created:</p>
+                <ol>
+                    <li>Go to your Speech resource in the Azure Portal</li>
+                    <li>Click "Keys and Endpoint" in the left menu</li>
+                    <li>Copy <strong>KEY 1</strong> (or KEY 2)</li>
+                    <li>Note your <strong>Location/Region</strong> (e.g., "eastus")</li>
+                </ol>
+
+                <div class="image-placeholder">
+                    <span>Screenshot: Keys and Endpoint page</span>
+                </div>
+
+                <div class="success-box">
+                    <h4>✓ You now have what you need!</h4>
+                    <p>Keep your API key safe. You'll enter it in Voice Reader settings.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="step">
+            <div class="step-header">
+                <div class="step-number">4</div>
+                <h2 class="step-title">Configure Voice Reader</h2>
+            </div>
+            <div class="step-content">
+                <p>Open Voice Reader and go to Settings:</p>
+                <ol>
+                    <li>Tap the gear icon to open Settings</li>
+                    <li>Select "Microsoft Speech Foundry" as the provider</li>
+                    <li>Enter the API URL using your region:
+                        <div class="code-block">
+                            <code>https://<span class="key">{region}</span>.tts.speech.microsoft.com/cognitiveservices/v1</code>
+                        </div>
+                    </li>
+                    <li>Paste your API Key</li>
+                    <li>Select a voice (Andrew HD recommended)</li>
+                    <li>Tap "Test" to verify it works</li>
+                </ol>
+
+                <p><strong>Example URL for East US 2:</strong></p>
+                <div class="code-block">
+                    <code>https://<span class="string">eastus2</span>.tts.speech.microsoft.com/cognitiveservices/v1</code>
+                </div>
+            </div>
+        </div>
+
+        <!-- Region Table -->
+        <div class="step">
+            <div class="step-header">
+                <div class="step-number">📍</div>
+                <h2 class="step-title">Region Codes</h2>
+            </div>
+            <div class="step-content">
+                <p>Use the region code that matches your Azure resource location:</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Location</th>
+                            <th>Region Code</th>
+                            <th>URL</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>East US</td>
+                            <td><code>eastus</code></td>
+                            <td><code>eastus.tts.speech.microsoft.com</code></td>
+                        </tr>
+                        <tr>
+                            <td>East US 2</td>
+                            <td><code>eastus2</code></td>
+                            <td><code>eastus2.tts.speech.microsoft.com</code></td>
+                        </tr>
+                        <tr>
+                            <td>West US</td>
+                            <td><code>westus</code></td>
+                            <td><code>westus.tts.speech.microsoft.com</code></td>
+                        </tr>
+                        <tr>
+                            <td>West Europe</td>
+                            <td><code>westeurope</code></td>
+                            <td><code>westeurope.tts.speech.microsoft.com</code></td>
+                        </tr>
+                        <tr>
+                            <td>East Asia</td>
+                            <td><code>eastasia</code></td>
+                            <td><code>eastasia.tts.speech.microsoft.com</code></td>
+                        </tr>
+                        <tr>
+                            <td>Southeast Asia</td>
+                            <td><code>southeastasia</code></td>
+                            <td><code>southeastasia.tts.speech.microsoft.com</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Recommended Voices -->
+        <div class="step">
+            <div class="step-header">
+                <div class="step-number">🎙️</div>
+                <h2 class="step-title">Recommended Voices</h2>
+            </div>
+            <div class="step-content">
+                <p>These voices work great with Voice Reader:</p>
+
+                <h4 style="margin: 20px 0 12px; color: var(--primary);">English</h4>
+                <div class="voice-list">
+                    <div class="voice-card">
+                        <h5>Andrew HD</h5>
+                        <code>en-US-Andrew:DragonHDLatestNeural</code>
+                        <div class="badge">Recommended</div>
+                    </div>
+                    <div class="voice-card">
+                        <h5>Ava Multilingual</h5>
+                        <code>en-US-AvaMultilingualNeural</code>
+                    </div>
+                    <div class="voice-card">
+                        <h5>Jenny</h5>
+                        <code>en-US-JennyNeural</code>
+                    </div>
+                </div>
+
+                <h4 style="margin: 20px 0 12px; color: var(--primary);">中文</h4>
+                <div class="voice-list">
+                    <div class="voice-card">
+                        <h5>晓晓 Xiaoxiao</h5>
+                        <code>zh-CN-XiaoxiaoNeural</code>
+                        <div class="badge">Most Popular</div>
+                    </div>
+                    <div class="voice-card">
+                        <h5>云希 Yunxi</h5>
+                        <code>zh-CN-YunxiNeural</code>
+                    </div>
+                    <div class="voice-card">
+                        <h5>晓晓 Multilingual</h5>
+                        <code>zh-CN-XiaoxiaoMultilingualNeural</code>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Troubleshooting -->
+        <div class="step">
+            <div class="step-header">
+                <div class="step-number">🔧</div>
+                <h2 class="step-title">Troubleshooting</h2>
+            </div>
+            <div class="step-content">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Error</th>
+                            <th>Solution</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>401 Unauthorized</td>
+                            <td>Check your API key is correct and not expired</td>
+                        </tr>
+                        <tr>
+                            <td>403 Forbidden</td>
+                            <td>Verify the region in your URL matches your resource region</td>
+                        </tr>
+                        <tr>
+                            <td>404 Not Found</td>
+                            <td>Check the URL format is correct</td>
+                        </tr>
+                        <tr>
+                            <td>No audio</td>
+                            <td>Verify the voice name exists and is spelled correctly</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p><a href="../index.html">Voice Reader</a> · <a href="../support.html">Support</a> · <a href="../faq.html">FAQ</a></p>
+    </footer>
+</body>
+</html>

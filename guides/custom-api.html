@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom API Setup Guide - Voice Reader</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root { --bg: #FAF9F5; --surface: #F5F4F0; --primary: #141413; --secondary: #5E5D59; --accent: #DA7756; --border: #E8E6DC; --dark: #191918; --radius-leaf: 0 16px 16px 16px; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: #30302E; line-height: 1.7; }
+        .back-nav { position: fixed; top: 0; left: 0; right: 0; background: rgba(250,249,245,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); padding: 16px 24px; z-index: 100; }
+        .back-nav a { display: inline-flex; align-items: center; gap: 8px; color: var(--secondary); text-decoration: none; font-size: 14px; }
+        .back-nav a:hover { color: var(--accent); }
+        .hero { background: linear-gradient(135deg, #8B5CF6, #7C3AED); color: white; padding: 120px 24px 60px; text-align: center; }
+        .hero h1 { font-family: Georgia, serif; font-size: 40px; font-weight: 400; margin-bottom: 16px; }
+        .hero p { font-size: 18px; opacity: 0.9; max-width: 500px; margin: 0 auto; }
+        .container { max-width: 700px; margin: 0 auto; padding: 48px 24px; }
+        .feature-box { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-leaf); padding: 24px; margin-bottom: 24px; }
+        .feature-box h3 { color: var(--primary); font-size: 18px; margin-bottom: 12px; }
+        .feature-box p, .feature-box li { color: var(--secondary); font-size: 14px; margin-bottom: 8px; }
+        .feature-box ul { padding-left: 20px; }
+        .code-block { background: var(--dark); border-radius: 12px; padding: 20px; margin: 20px 0; overflow-x: auto; }
+        .code-block code { color: #E8E6DC; font-family: 'SF Mono', Monaco, monospace; font-size: 13px; white-space: pre; display: block; }
+        .code-label { color: var(--accent); font-size: 12px; font-weight: 600; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        h2 { font-family: Georgia, serif; font-size: 24px; color: var(--primary); margin: 40px 0 16px; }
+        h3 { font-size: 18px; color: var(--primary); margin: 24px 0 12px; }
+        p { color: var(--secondary); margin-bottom: 16px; }
+        ul, ol { color: var(--secondary); padding-left: 24px; margin-bottom: 16px; }
+        li { margin-bottom: 8px; }
+        a { color: var(--accent); }
+        code { background: var(--surface); padding: 2px 6px; border-radius: 4px; font-family: 'SF Mono', Monaco, monospace; font-size: 13px; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        th, td { text-align: left; padding: 12px 16px; border-bottom: 1px solid var(--border); font-size: 14px; }
+        th { background: var(--surface); font-weight: 600; color: var(--primary); }
+        td { color: var(--secondary); }
+        .warning-box { background: #FEF3C7; border: 1px solid #F59E0B; border-radius: var(--radius-leaf); padding: 20px; margin: 24px 0; }
+        .warning-box h4 { color: #92400E; font-size: 14px; margin-bottom: 8px; }
+        .warning-box p { color: #92400E; font-size: 14px; margin-bottom: 0; }
+        footer { background: var(--surface); border-top: 1px solid var(--border); padding: 24px; text-align: center; font-size: 13px; color: var(--secondary); }
+        footer a { text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="back-nav">
+        <a href="../support.html">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            Back to Support
+        </a>
+    </div>
+    <div class="hero">
+        <h1>Custom API Setup</h1>
+        <p>Connect Voice Reader to any TTS service with a compatible API</p>
+    </div>
+    <div class="container">
+        <div class="feature-box">
+            <h3>🔧 When to Use Custom API</h3>
+            <p>Use Custom API when you want to connect to:</p>
+            <ul>
+                <li>Self-hosted TTS servers (OpenAI-compatible APIs)</li>
+                <li>Third-party TTS services not built into Voice Reader</li>
+                <li>Enterprise TTS endpoints with custom authentication</li>
+            </ul>
+        </div>
+
+        <h2>API Specification</h2>
+        <p>Your TTS endpoint must accept HTTP POST requests and return audio data. Voice Reader supports two request formats:</p>
+
+        <h3>Option 1: JSON Request Body</h3>
+        <div class="code-block">
+            <div class="code-label">Request</div>
+            <code>POST /api/tts
+Content-Type: application/json
+Authorization: Bearer YOUR_API_KEY
+
+{
+  "text": "Hello, world!",
+  "voice": "en-US-JennyNeural",
+  "rate": 1.0
+}</code>
+        </div>
+
+        <h3>Option 2: SSML Request Body</h3>
+        <div class="code-block">
+            <div class="code-label">Request</div>
+            <code>POST /api/tts
+Content-Type: application/ssml+xml
+Authorization: Bearer YOUR_API_KEY
+
+&lt;speak version="1.0" xml:lang="en-US"&gt;
+  &lt;voice name="en-US-JennyNeural"&gt;
+    &lt;prosody rate="1.0"&gt;Hello, world!&lt;/prosody&gt;
+  &lt;/voice&gt;
+&lt;/speak&gt;</code>
+        </div>
+
+        <h2>Response Format</h2>
+        <p>Your API must return audio data directly in the response body:</p>
+
+        <div class="code-block">
+            <div class="code-label">Response</div>
+            <code>HTTP/1.1 200 OK
+Content-Type: audio/mpeg
+
+[Binary audio data...]</code>
+        </div>
+
+        <h3>Supported Audio Formats</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Format</th>
+                    <th>Content-Type</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>MP3</td>
+                    <td><code>audio/mpeg</code></td>
+                    <td>Recommended, best compatibility</td>
+                </tr>
+                <tr>
+                    <td>WAV</td>
+                    <td><code>audio/wav</code></td>
+                    <td>Larger file size</td>
+                </tr>
+                <tr>
+                    <td>OGG</td>
+                    <td><code>audio/ogg</code></td>
+                    <td>Good compression</td>
+                </tr>
+                <tr>
+                    <td>AAC</td>
+                    <td><code>audio/aac</code></td>
+                    <td>iOS native format</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Request Parameters</h2>
+        <p>Voice Reader sends these parameters in the JSON request body:</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Parameter</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>text</code></td>
+                    <td>string</td>
+                    <td>The text to synthesize (required)</td>
+                </tr>
+                <tr>
+                    <td><code>voice</code></td>
+                    <td>string</td>
+                    <td>Voice ID from your settings</td>
+                </tr>
+                <tr>
+                    <td><code>rate</code></td>
+                    <td>number</td>
+                    <td>Speech rate (0.5 - 2.0, default 1.0)</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Configure in Voice Reader</h2>
+        <p>Open Voice Reader Settings and configure:</p>
+        <ul>
+            <li><strong>Provider:</strong> Custom API</li>
+            <li><strong>API URL:</strong> Your endpoint URL (e.g., <code>https://api.example.com/tts</code>)</li>
+            <li><strong>API Key:</strong> Your authentication token (sent as Bearer token)</li>
+            <li><strong>Voice ID:</strong> The voice identifier your API expects</li>
+        </ul>
+
+        <div class="warning-box">
+            <h4>⚠️ Security Note</h4>
+            <p>Your API key is stored securely on your device and is only sent to the URL you configure. Never share your API key with others.</p>
+        </div>
+
+        <h2>Example: OpenAI-Compatible Server</h2>
+        <p>Many self-hosted TTS solutions provide OpenAI-compatible APIs. Here's an example configuration:</p>
+
+        <div class="code-block">
+            <div class="code-label">Settings</div>
+            <code>Provider: Custom API
+API URL: http://localhost:8080/v1/audio/speech
+API Key: (leave empty for local)
+Voice ID: alloy</code>
+        </div>
+
+        <h2>Troubleshooting</h2>
+
+        <div class="feature-box">
+            <h3>No audio playing</h3>
+            <ul>
+                <li>Verify your API URL is accessible from your device</li>
+                <li>Check that your API returns valid audio data</li>
+                <li>Ensure the Content-Type header matches the audio format</li>
+            </ul>
+        </div>
+
+        <div class="feature-box">
+            <h3>Authentication errors</h3>
+            <ul>
+                <li>Verify your API key is correct</li>
+                <li>Check if your API uses a different auth method</li>
+                <li>Some APIs require the key in a custom header</li>
+            </ul>
+        </div>
+
+        <div class="feature-box">
+            <h3>Network errors</h3>
+            <ul>
+                <li>For local servers, ensure your device is on the same network</li>
+                <li>Check if your server allows CORS (for web-based APIs)</li>
+                <li>Verify the server is running and accepting connections</li>
+            </ul>
+        </div>
+
+        <div class="feature-box">
+            <h3>💡 Need Help?</h3>
+            <p>If you're having trouble setting up a custom API, <a href="mailto:anzchy@163.com">contact us</a> with details about your TTS service and we'll help you configure it.</p>
+        </div>
+    </div>
+    <footer>
+        <p><a href="../index.html">Voice Reader</a> · <a href="../support.html">Support</a> · <a href="azure-speech.html">Azure Guide</a> · <a href="piper.html">Piper Guide</a></p>
+    </footer>
+</body>
+</html>

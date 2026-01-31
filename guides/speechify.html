@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speechify Setup Guide - Voice Reader</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root { --bg: #FAF9F5; --surface: #F5F4F0; --primary: #141413; --secondary: #5E5D59; --accent: #DA7756; --border: #E8E6DC; --dark: #191918; --radius-leaf: 0 16px 16px 16px; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: #30302E; line-height: 1.7; }
+        .back-nav { position: fixed; top: 0; left: 0; right: 0; background: rgba(250,249,245,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); padding: 16px 24px; z-index: 100; }
+        .back-nav a { display: inline-flex; align-items: center; gap: 8px; color: var(--secondary); text-decoration: none; font-size: 14px; }
+        .back-nav a:hover { color: var(--accent); }
+        .hero { background: linear-gradient(135deg, #6366F1, #4F46E5); color: white; padding: 120px 24px 60px; text-align: center; }
+        .hero h1 { font-family: Georgia, serif; font-size: 40px; font-weight: 400; margin-bottom: 16px; }
+        .hero p { font-size: 18px; opacity: 0.9; max-width: 500px; margin: 0 auto; }
+        .container { max-width: 700px; margin: 0 auto; padding: 48px 24px; }
+        .coming-soon { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-leaf); padding: 60px 40px; text-align: center; }
+        .coming-soon h2 { font-family: Georgia, serif; font-size: 28px; color: var(--primary); margin-bottom: 16px; }
+        .coming-soon p { color: var(--secondary); margin-bottom: 24px; }
+        .coming-soon a { display: inline-block; background: var(--accent); color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; }
+        footer { background: var(--surface); border-top: 1px solid var(--border); padding: 24px; text-align: center; font-size: 13px; color: var(--secondary); }
+        footer a { color: var(--accent); text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="back-nav">
+        <a href="../support.html">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            Back to Support
+        </a>
+    </div>
+    <div class="hero">
+        <h1>Speechify Setup</h1>
+        <p>Configure Speechify API for premium celebrity voices</p>
+    </div>
+    <div class="container">
+        <div class="coming-soon">
+            <h2>Coming Soon</h2>
+            <p>We're working on a detailed Speechify setup guide. In the meantime, visit the Speechify developer portal to get started.</p>
+            <a href="https://speechify.com" target="_blank">Visit Speechify →</a>
+        </div>
+    </div>
+    <footer>
+        <p><a href="../index.html">Voice Reader</a> · <a href="../support.html">Support</a> · <a href="azure-speech.html">Azure Guide</a></p>
+    </footer>
+</body>
+</html>

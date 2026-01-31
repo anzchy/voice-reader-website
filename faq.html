@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - Voice Reader</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #FAF9F5;
+            --surface: #F5F4F0;
+            --primary: #141413;
+            --body: #30302E;
+            --secondary: #5E5D59;
+            --accent: #DA7756;
+            --border: #E8E6DC;
+            --dark: #191918;
+            --radius-leaf: 0 16px 16px 16px;
+            --radius-md: 12px;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--body);
+            line-height: 1.6;
+        }
+
+        .back-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(250, 249, 245, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            padding: 16px 24px;
+            z-index: 100;
+        }
+
+        .back-nav a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--secondary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .back-nav a:hover { color: var(--accent); }
+
+        .header {
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            padding: 100px 24px 60px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-family: Georgia, serif;
+            font-size: 40px;
+            font-weight: 400;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .header p {
+            font-size: 16px;
+            color: var(--secondary);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 48px 24px 80px;
+        }
+
+        /* Category Tabs */
+        .category-nav {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+            justify-content: center;
+        }
+
+        .category-tab {
+            padding: 10px 20px;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--secondary);
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+
+        .category-tab:hover, .category-tab.active {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            margin-bottom: 48px;
+        }
+
+        .faq-section-title {
+            font-family: Georgia, serif;
+            font-size: 24px;
+            font-weight: 400;
+            color: var(--primary);
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .faq-section-title span {
+            font-size: 24px;
+        }
+
+        /* FAQ Item */
+        .faq-item {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            margin-bottom: 12px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 20px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .faq-question:hover {
+            background: var(--surface);
+        }
+
+        .faq-question h3 {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--primary);
+            flex: 1;
+            padding-right: 16px;
+        }
+
+        .faq-toggle {
+            width: 28px;
+            height: 28px;
+            background: var(--surface);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.3s;
+        }
+
+        .faq-toggle svg {
+            color: var(--accent);
+            transition: transform 0.3s;
+        }
+
+        .faq-item.open .faq-toggle {
+            background: var(--accent);
+        }
+
+        .faq-item.open .faq-toggle svg {
+            color: white;
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            display: none;
+            padding: 0 24px 24px;
+            color: var(--secondary);
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .faq-item.open .faq-answer {
+            display: block;
+        }
+
+        .faq-answer ul {
+            padding-left: 20px;
+            margin: 12px 0;
+        }
+
+        .faq-answer li {
+            margin-bottom: 8px;
+        }
+
+        .faq-answer code {
+            background: var(--surface);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+
+        .faq-answer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .faq-answer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Contact CTA */
+        .contact-cta {
+            background: var(--dark);
+            border-radius: var(--radius-leaf);
+            padding: 40px;
+            text-align: center;
+            color: white;
+            margin-top: 48px;
+        }
+
+        .contact-cta h3 {
+            font-family: Georgia, serif;
+            font-size: 24px;
+            font-weight: 400;
+            margin-bottom: 12px;
+        }
+
+        .contact-cta p {
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 24px;
+        }
+
+        .contact-cta a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--accent);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .contact-cta a:hover {
+            background: var(--accent-hover, #C45A3A);
+        }
+
+        footer {
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+            padding: 24px;
+            text-align: center;
+            font-size: 13px;
+            color: var(--secondary);
+        }
+
+        footer a { color: var(--accent); text-decoration: none; }
+
+        @media (max-width: 600px) {
+            .header { padding: 100px 20px 40px; }
+            .header h1 { font-size: 32px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="back-nav">
+        <a href="index.html">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+            Back to Home
+        </a>
+    </div>
+
+    <div class="header">
+        <h1>Frequently Asked Questions</h1>
+        <p>Find answers to common questions about Voice Reader</p>
+    </div>
+
+    <div class="container">
+        <!-- Category Nav -->
+        <div class="category-nav">
+            <a href="#getting-started" class="category-tab active">Getting Started</a>
+            <a href="#tts" class="category-tab">TTS Setup</a>
+            <a href="#audio" class="category-tab">Audio Issues</a>
+            <a href="#features" class="category-tab">Features</a>
+            <a href="#import" class="category-tab">Import</a>
+        </div>
+
+        <!-- Getting Started -->
+        <section class="faq-section" id="getting-started">
+            <h2 class="faq-section-title"><span>🚀</span> Getting Started</h2>
+
+            <div class="faq-item open">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>How do I get started with Voice Reader?</h3>
+                    <div class="faq-toggle">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M6 9l6 6 6-6"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="faq-answer">
+                    <p>Getting started is easy:</p>
+                    <ul>
+                        <li>Download Voice Reader from the App Store</li>
+                        <li>Open the app and complete the onboarding</li>
+                        <li>Set up a TTS provider (we recommend Azure Speech)</li>
+                        <li>Import an EPUB book from the Files app</li>
+                        <li>Tap play and enjoy!</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>Is Voice Reader free to use?</h3>
+                    <div class="faq-toggle">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M6 9l6 6 6-6"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes, Voice Reader is free to download and use. However, you'll need to provide your own TTS API key. Azure Speech offers a free tier with 500,000 characters per month, which is plenty for most users.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>What devices are supported?</h3>
+                    <div class="faq-toggle">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M6 9l6 6 6-6"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="faq-answer">
+                    <p>Voice Reader requires iOS 17.0 or later. It works on iPhone and iPad.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- TTS Setup -->
+        <section class="faq-section" id="tts">
+            <h2 class="faq-section-title"><span>🎙️</span> TTS Setup</h2>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>Which TTS provider should I use?</h3>
+                    <div class="faq-toggle">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M6 9l6 6 6-6"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="faq-answer">
+                    <p>We recommend <strong>Microsoft Azure Speech</strong> for most users:</p>
+                    <ul>
+                        <li>HD neural voices with natural expression</li>
+                        <li>Free tier: 500,000 characters/month</li>
+                        <li>Support for many languages including English and Chinese</li>
+                    </ul>
+                    <p><a href="guides/azure-speech.html">View Azure setup guide →</a></p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>How do I get an Azure API key?</h3>
+                    <div class="faq-toggle">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M6 9l6 6 6-6"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="faq-answer">
+                    <p>Follow these steps:</p>
+                    <ul>
+                        <li>Create a free Azure account at <a href="https://azure.microsoft.com" target="_blank">azure.microsoft.com</a></li>
+                        <li>Create a Speech resource in the Azure portal</li>
+                        <li>Copy your API key from Keys and Endpoint</li>
+                        <li>Enter the key in Voice Reader settings</li>
+                    </ul>
+                    <p><a href="guides/azure-speech.html">View detailed guide with screenshots →</a></p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>Can I use Voice Reader offline?</h3>
+                    <div class="faq-toggle">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M6 9l6 6 6-6"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes, with the Piper TTS option. Piper is a self-hosted TTS service that runs on your local network. You can set up a Piper server on your computer or NAS and use Voice Reader without internet.</p>
+                    <p><a href="guides/piper.html">View Piper setup guide →</a></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Audio Issues -->
+        <section class="faq-section" id="audio">
+            <h2 class="faq-section-title"><span>🔊</span> Audio Issues</h2>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>No audio is playing when I tap play</h3>
+                    <div class="faq-toggle">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M6 9l6 6 6-6"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="faq-answer">
+                    <p>Try these troubleshooting steps:</p>
+                    <ul>
+                        <li>Check your device volume and silent mode</li>
+                        <li>Verify your TTS API credentials in Settings</li>
+                        <li>Test your API key using the test button in the TTS wizard</li>
+                        <li>Check your internet connection</li>
+                        <li>Try a different voice in Settings</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="faq-item" id="sync">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>Text highlighting is not synchronized</h3>
+                    <div class="faq-toggle">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M6 9l6 6 6-6"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="faq-answer">
+                    <p>Highlighting sync depends on several factors:</p>
+                    <ul>
+                        <li>Try adjusting the speech rate in Settings</li>
+                        <li>Some complex book layouts may affect sync accuracy</li>
+                        <li>Ensure you're using a stable internet connection</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>Audio stops when I switch apps</h3>
+                    <div class="faq-toggle">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M6 9l6 6 6-6"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="faq-answer">
+                    <p>Voice Reader supports background playback. Make sure:</p>
+                    <ul>
+                        <li>Background App Refresh is enabled for Voice Reader</li>
+                        <li>Low Power Mode is disabled (it can interrupt background audio)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features -->
+        <section class="faq-section" id="features">
+            <h2 class="faq-section-title"><span>✨</span> Features</h2>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>How do I add bookmarks or highlights?</h3>
+                    <div class="faq-toggle">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M6 9l6 6 6-6"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="faq-answer">
+                    <p>While reading:</p>
+                    <ul>
+                        <li><strong>Bookmark:</strong> Tap the bookmark icon in the toolbar</li>
+                        <li><strong>Highlight:</strong> Long-press on text to select, then tap "Highlight"</li>
+                        <li><strong>Note:</strong> Select text and tap "Add Note"</li>
+                    </ul>
+                    <p>View all your annotations from the Notes panel.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>Does Voice Reader have a sleep timer?</h3>
+                    <div class="faq-toggle">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M6 9l6 6 6-6"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes! Tap the timer icon in the playback controls to set a sleep timer. Options include 5, 15, 30, 60 minutes, or end of chapter.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>Can I change the reading theme?</h3>
+                    <div class="faq-toggle">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M6 9l6 6 6-6"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes, Voice Reader supports multiple themes:</p>
+                    <ul>
+                        <li><strong>Light:</strong> White background</li>
+                        <li><strong>Sepia:</strong> Warm, paper-like background</li>
+                        <li><strong>Dark:</strong> Dark background for night reading</li>
+                    </ul>
+                    <p>Tap the appearance icon (Aa) in the reader to change themes, font size, and more.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Import -->
+        <section class="faq-section" id="import">
+            <h2 class="faq-section-title"><span>📚</span> Book Import</h2>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>What file formats are supported?</h3>
+                    <div class="faq-toggle">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M6 9l6 6 6-6"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="faq-answer">
+                    <p>Voice Reader currently supports <strong>EPUB</strong> format. This is the most common e-book format and is supported by most e-book stores.</p>
+                    <p>PDF support may be added in a future update.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>How do I import books?</h3>
+                    <div class="faq-toggle">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M6 9l6 6 6-6"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="faq-answer">
+                    <p>There are several ways to import books:</p>
+                    <ul>
+                        <li>Tap the + button in your library and select from Files</li>
+                        <li>Open an EPUB file from Files app → Share → Voice Reader</li>
+                        <li>Download an EPUB from Safari → Open in Voice Reader</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>Can I import DRM-protected books?</h3>
+                    <div class="faq-toggle">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M6 9l6 6 6-6"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="faq-answer">
+                    <p>No, Voice Reader only works with DRM-free EPUB files. Books purchased from most stores include DRM protection. You can find DRM-free books from:</p>
+                    <ul>
+                        <li>Project Gutenberg (free public domain books)</li>
+                        <li>Standard Ebooks (free, beautifully formatted classics)</li>
+                        <li>Some publishers that sell DRM-free editions</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact CTA -->
+        <div class="contact-cta">
+            <h3>Still have questions?</h3>
+            <p>Can't find the answer you're looking for? We're here to help.</p>
+            <a href="mailto:anzchy@163.com">
+                Contact Support
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                </svg>
+            </a>
+        </div>
+    </div>
+
+    <footer>
+        <p><a href="index.html">Voice Reader</a> · <a href="privacy.html">Privacy Policy</a> · <a href="support.html">Support</a></p>
+    </footer>
+
+    <script>
+        function toggleFaq(element) {
+            const item = element.closest('.faq-item');
+            item.classList.toggle('open');
+        }
+
+        // Handle anchor links
+        if (window.location.hash) {
+            const target = document.querySelector(window.location.hash);
+            if (target) {
+                setTimeout(() => {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 100);
+            }
+        }
+    </script>
+</body>
+</html>

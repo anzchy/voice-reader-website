@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Use - Voice Reader</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #FAF9F5;
+            --surface: #F5F4F0;
+            --primary: #141413;
+            --body: #30302E;
+            --secondary: #5E5D59;
+            --accent: #DA7756;
+            --border: #E8E6DC;
+            --dark: #191918;
+            --radius-leaf: 0 16px 16px 16px;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--body);
+            line-height: 1.7;
+        }
+
+        .header {
+            background: var(--dark);
+            color: white;
+            padding: 80px 24px 60px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-family: Georgia, serif;
+            font-size: 40px;
+            font-weight: 400;
+            margin-bottom: 8px;
+        }
+
+        .header .subtitle { font-size: 16px; opacity: 0.8; }
+        .header .update-date { font-size: 14px; opacity: 0.6; margin-top: 16px; }
+
+        .back-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(250, 249, 245, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            padding: 16px 24px;
+            z-index: 100;
+        }
+
+        .back-nav a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--secondary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .back-nav a:hover { color: var(--accent); }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 48px 24px 80px;
+        }
+
+        section { margin-bottom: 40px; }
+
+        h2 {
+            font-family: Georgia, serif;
+            font-size: 24px;
+            font-weight: 400;
+            color: var(--primary);
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        h3 {
+            font-size: 17px;
+            font-weight: 600;
+            color: var(--primary);
+            margin: 24px 0 12px;
+        }
+
+        p { color: var(--secondary); margin-bottom: 16px; }
+
+        ul, ol {
+            color: var(--secondary);
+            padding-left: 24px;
+            margin-bottom: 16px;
+        }
+
+        li { margin-bottom: 8px; }
+
+        .highlight-box {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-leaf);
+            padding: 24px;
+            margin: 24px 0;
+        }
+
+        .highlight-box h4 {
+            color: var(--accent);
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .highlight-box p { margin-bottom: 0; }
+
+        .contact-box {
+            background: var(--accent);
+            border-radius: var(--radius-leaf);
+            padding: 32px;
+            margin-top: 48px;
+            color: white;
+        }
+
+        .contact-box h3 {
+            color: white;
+            margin-top: 0;
+            font-family: Georgia, serif;
+            font-weight: 400;
+        }
+
+        .contact-box p { color: rgba(255,255,255,0.9); }
+        .contact-box a { color: white; font-weight: 600; }
+
+        footer {
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+            padding: 24px;
+            text-align: center;
+            font-size: 13px;
+            color: var(--secondary);
+        }
+
+        footer a { color: var(--accent); text-decoration: none; }
+
+        @media (max-width: 600px) {
+            .header { padding: 100px 20px 40px; }
+            .header h1 { font-size: 32px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="back-nav">
+        <a href="index.html">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+            Back to Home
+        </a>
+    </div>
+
+    <div class="header">
+        <h1>Terms of Use</h1>
+        <div class="subtitle">Voice Reader iOS App</div>
+        <div class="update-date">Effective: January 27, 2026</div>
+    </div>
+
+    <div class="container">
+        <section>
+            <h2>Agreement to Terms</h2>
+            <p>By downloading, installing, or using Voice Reader ("the App"), you agree to be bound by these Terms of Use. If you do not agree to these terms, please do not use the App.</p>
+        </section>
+
+        <section>
+            <h2>Description of Service</h2>
+            <p>Voice Reader is an iOS application that allows you to:</p>
+            <ul>
+                <li>Import and read EPUB format e-books</li>
+                <li>Convert text to speech using third-party TTS services</li>
+                <li>View synchronized text highlighting during playback</li>
+                <li>Save bookmarks, highlights, and notes</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>User Responsibilities</h2>
+            <h3>Content Rights</h3>
+            <p>You are responsible for ensuring that:</p>
+            <ul>
+                <li>You have the legal right to access and use any content you import into the App</li>
+                <li>Your use of e-books complies with applicable copyright laws</li>
+                <li>You do not use the App to infringe on intellectual property rights</li>
+            </ul>
+
+            <h3>Third-Party Services</h3>
+            <p>The App requires external TTS services to function. You are responsible for:</p>
+            <ul>
+                <li>Obtaining your own API credentials from TTS providers</li>
+                <li>Complying with the terms of service of your chosen TTS provider</li>
+                <li>Any costs associated with TTS API usage</li>
+                <li>Keeping your API credentials secure</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Intellectual Property</h2>
+            <p>The Voice Reader app, including its design, code, and documentation, is protected by copyright and other intellectual property laws. You may not:</p>
+            <ul>
+                <li>Copy, modify, or distribute the App</li>
+                <li>Reverse engineer or decompile the App</li>
+                <li>Remove any copyright notices from the App</li>
+                <li>Use the App's name or branding without permission</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Disclaimer of Warranties</h2>
+            <div class="highlight-box">
+                <h4>Important Notice</h4>
+                <p>Voice Reader is provided "as is" without warranty of any kind. We do not guarantee that the App will be error-free, uninterrupted, or meet your specific requirements. TTS service availability depends on third-party providers.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>Limitation of Liability</h2>
+            <p>To the maximum extent permitted by law, we shall not be liable for:</p>
+            <ul>
+                <li>Any indirect, incidental, or consequential damages</li>
+                <li>Loss of data or content</li>
+                <li>Service interruptions from TTS providers</li>
+                <li>Costs incurred from third-party API usage</li>
+                <li>Any damages resulting from your use of the App</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Third-Party Services</h2>
+            <p>Voice Reader integrates with third-party TTS services. Your use of these services is subject to their respective terms:</p>
+            <ul>
+                <li><a href="https://azure.microsoft.com/support/legal/" target="_blank">Microsoft Azure Terms</a></li>
+                <li><a href="https://speechify.com/terms" target="_blank">Speechify Terms</a></li>
+            </ul>
+            <p>We are not responsible for the availability, accuracy, or policies of third-party services.</p>
+        </section>
+
+        <section>
+            <h2>Modifications</h2>
+            <p>We reserve the right to modify these Terms at any time. Continued use of the App after changes constitutes acceptance of the new terms. We recommend reviewing this page periodically.</p>
+        </section>
+
+        <section>
+            <h2>Termination</h2>
+            <p>You may stop using the App at any time by uninstalling it. We reserve the right to terminate or suspend access to the App for violations of these terms.</p>
+        </section>
+
+        <section>
+            <h2>Governing Law</h2>
+            <p>These Terms shall be governed by and construed in accordance with applicable laws, without regard to conflict of law principles.</p>
+        </section>
+
+        <div class="contact-box">
+            <h3>Questions?</h3>
+            <p>If you have questions about these Terms, please contact us at <a href="mailto:anzchy@163.com">anzchy@163.com</a></p>
+        </div>
+    </div>
+
+    <footer>
+        <p><a href="index.html">Voice Reader</a> · <a href="privacy.html">Privacy Policy</a> · <a href="support.html">Support</a></p>
+    </footer>
+</body>
+</html>
