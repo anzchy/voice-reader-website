@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Custom API Setup Guide - Voice Reader</title>
+    <title>Custom API Setup Guide - ListenBook</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         :root { --bg: #FAF9F5; --surface: #F5F4F0; --primary: #141413; --secondary: #5E5D59; --accent: #DA7756; --border: #E8E6DC; --dark: #191918; --radius-leaf: 0 16px 16px 16px; }
@@ -50,7 +50,7 @@
     </div>
     <div class="hero">
         <h1>Custom API Setup</h1>
-        <p>Connect Voice Reader to any TTS service with a compatible API</p>
+        <p>Connect ListenBook to any TTS service with a compatible API</p>
     </div>
     <div class="container">
         <div class="feature-box">
@@ -58,13 +58,13 @@
             <p>Use Custom API when you want to connect to:</p>
             <ul>
                 <li>Self-hosted TTS servers (OpenAI-compatible APIs)</li>
-                <li>Third-party TTS services not built into Voice Reader</li>
+                <li>Third-party TTS services not built into ListenBook</li>
                 <li>Enterprise TTS endpoints with custom authentication</li>
             </ul>
         </div>
 
         <h2>API Specification</h2>
-        <p>Your TTS endpoint must accept HTTP POST requests and return audio data. Voice Reader supports two request formats:</p>
+        <p>Your TTS endpoint must accept HTTP POST requests and return audio data. ListenBook supports two request formats:</p>
 
         <h3>Option 1: JSON Request Body</h3>
         <div class="code-block">
@@ -139,7 +139,7 @@ Content-Type: audio/mpeg
         </table>
 
         <h2>Request Parameters</h2>
-        <p>Voice Reader sends these parameters in the JSON request body:</p>
+        <p>ListenBook sends these parameters in the JSON request body:</p>
 
         <table>
             <thead>
@@ -168,8 +168,8 @@ Content-Type: audio/mpeg
             </tbody>
         </table>
 
-        <h2>Configure in Voice Reader</h2>
-        <p>Open Voice Reader Settings and configure:</p>
+        <h2>Configure in ListenBook</h2>
+        <p>Open ListenBook Settings and configure:</p>
         <ul>
             <li><strong>Provider:</strong> Custom API</li>
             <li><strong>API URL:</strong> Your endpoint URL (e.g., <code>https://api.example.com/tts</code>)</li>
@@ -228,7 +228,7 @@ Voice ID: alloy</code>
         </div>
     </div>
     <footer>
-        <p><a href="../index.html">Voice Reader</a> · <a href="../support.html">Support</a> · <a href="azure-speech.html">Azure Guide</a> · <a href="piper.html">Piper Guide</a></p>
+        <p><a href="../index.html">ListenBook</a> · <a href="../support.html">Support</a> · <a href="azure-speech.html">Azure Guide</a> · <a href="piper.html">Piper Guide</a></p>
     </footer>
 </body>
 </html>

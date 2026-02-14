@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FAQ - Voice Reader</title>
+    <title>FAQ - ListenBook</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
@@ -291,13 +291,14 @@
 
     <div class="header">
         <h1>Frequently Asked Questions</h1>
-        <p>Find answers to common questions about Voice Reader</p>
+        <p>Find answers to common questions about ListenBook</p>
     </div>
 
     <div class="container">
         <!-- Category Nav -->
         <div class="category-nav">
             <a href="#getting-started" class="category-tab active">Getting Started</a>
+            <a href="#rss" class="category-tab">RSS Reader</a>
             <a href="#tts" class="category-tab">TTS Setup</a>
             <a href="#audio" class="category-tab">Audio Issues</a>
             <a href="#features" class="category-tab">Features</a>
@@ -310,7 +311,7 @@
 
             <div class="faq-item open">
                 <div class="faq-question" onclick="toggleFaq(this)">
-                    <h3>How do I get started with Voice Reader?</h3>
+                    <h3>How do I get started with ListenBook?</h3>
                     <div class="faq-toggle">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M6 9l6 6 6-6"/>
@@ -320,7 +321,7 @@
                 <div class="faq-answer">
                     <p>Getting started is easy:</p>
                     <ul>
-                        <li>Download Voice Reader from the App Store</li>
+                        <li>Download ListenBook from the App Store</li>
                         <li>Open the app and complete the onboarding</li>
                         <li>Set up a TTS provider (we recommend Azure Speech)</li>
                         <li>Import an EPUB book from the Files app</li>
@@ -331,7 +332,7 @@
 
             <div class="faq-item">
                 <div class="faq-question" onclick="toggleFaq(this)">
-                    <h3>Is Voice Reader free to use?</h3>
+                    <h3>Is ListenBook free to use?</h3>
                     <div class="faq-toggle">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M6 9l6 6 6-6"/>
@@ -339,7 +340,7 @@
                     </div>
                 </div>
                 <div class="faq-answer">
-                    <p>Yes, Voice Reader is free to download and use. However, you'll need to provide your own TTS API key. Azure Speech offers a free tier with 500,000 characters per month, which is plenty for most users.</p>
+                    <p>Yes, ListenBook is free to download and use. However, you'll need to provide your own TTS API key. Azure Speech offers a free tier with 500,000 characters per month, which is plenty for most users.</p>
                 </div>
             </div>
 
@@ -353,7 +354,119 @@
                     </div>
                 </div>
                 <div class="faq-answer">
-                    <p>Voice Reader requires iOS 17.0 or later. It works on iPhone and iPad.</p>
+                    <p>ListenBook requires iOS 17.0 or later. It works on iPhone and iPad.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- RSS Reader -->
+        <section class="faq-section" id="rss">
+            <h2 class="faq-section-title"><span>📡</span> RSS Reader</h2>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>What is the RSS Reader feature?</h3>
+                    <div class="faq-toggle">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M6 9l6 6 6-6"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="faq-answer">
+                    <p>ListenBook can subscribe to RSS and Atom feeds from your favorite blogs, news sites, and newsletters. Articles are fetched and can be read aloud with the same TTS and sentence highlighting you get with EPUB books.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>How do I add an RSS feed?</h3>
+                    <div class="faq-toggle">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M6 9l6 6 6-6"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="faq-answer">
+                    <p>To add a feed:</p>
+                    <ul>
+                        <li>Go to Library and select the "Feeds" tab</li>
+                        <li>Tap the + button in the toolbar</li>
+                        <li>Enter the RSS feed URL (e.g., https://example.com/feed)</li>
+                        <li>The feed will be validated and added to your library</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>What feed formats are supported?</h3>
+                    <div class="faq-toggle">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M6 9l6 6 6-6"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="faq-answer">
+                    <p>ListenBook supports:</p>
+                    <ul>
+                        <li><strong>RSS 2.0</strong> - The most common feed format</li>
+                        <li><strong>Atom</strong> - Another popular feed standard</li>
+                    </ul>
+                    <p>Most blogs and news sites provide feeds in one of these formats.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>Can I import my subscriptions from another RSS reader?</h3>
+                    <div class="faq-toggle">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M6 9l6 6 6-6"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes! ListenBook supports OPML import. Export an OPML file from your current RSS reader, then:</p>
+                    <ul>
+                        <li>Go to Settings → RSS Settings</li>
+                        <li>Tap "Import OPML"</li>
+                        <li>Select your OPML file from Files</li>
+                    </ul>
+                    <p>You can also export your ListenBook subscriptions as OPML for backup.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>How often do feeds refresh?</h3>
+                    <div class="faq-toggle">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M6 9l6 6 6-6"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="faq-answer">
+                    <p>Feeds are synced when you:</p>
+                    <ul>
+                        <li>Open the app</li>
+                        <li>Pull down to refresh on the feed list</li>
+                        <li>Tap the refresh button on an individual feed</li>
+                    </ul>
+                    <p>Old articles (over 30 days) are automatically cleaned up, except for starred articles which are kept indefinitely.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <h3>Can I read articles in fullscreen mode?</h3>
+                    <div class="faq-toggle">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M6 9l6 6 6-6"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes! While reading an article, tap anywhere on the content area to toggle fullscreen mode. This hides the navigation bar and player bar for distraction-free reading. Tap again to restore the controls.</p>
                 </div>
             </div>
         </section>
@@ -397,7 +510,7 @@
                         <li>Create a free Azure account at <a href="https://azure.microsoft.com" target="_blank">azure.microsoft.com</a></li>
                         <li>Create a Speech resource in the Azure portal</li>
                         <li>Copy your API key from Keys and Endpoint</li>
-                        <li>Enter the key in Voice Reader settings</li>
+                        <li>Enter the key in ListenBook settings</li>
                     </ul>
                     <p><a href="guides/azure-speech.html">View detailed guide with screenshots →</a></p>
                 </div>
@@ -405,7 +518,7 @@
 
             <div class="faq-item">
                 <div class="faq-question" onclick="toggleFaq(this)">
-                    <h3>Can I use Voice Reader offline?</h3>
+                    <h3>Can I use ListenBook offline?</h3>
                     <div class="faq-toggle">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M6 9l6 6 6-6"/>
@@ -413,7 +526,7 @@
                     </div>
                 </div>
                 <div class="faq-answer">
-                    <p>Yes, with the Piper TTS option. Piper is a self-hosted TTS service that runs on your local network. You can set up a Piper server on your computer or NAS and use Voice Reader without internet.</p>
+                    <p>Yes, with the Piper TTS option. Piper is a self-hosted TTS service that runs on your local network. You can set up a Piper server on your computer or NAS and use ListenBook without internet.</p>
                     <p><a href="guides/piper.html">View Piper setup guide →</a></p>
                 </div>
             </div>
@@ -473,9 +586,9 @@
                     </div>
                 </div>
                 <div class="faq-answer">
-                    <p>Voice Reader supports background playback. Make sure:</p>
+                    <p>ListenBook supports background playback. Make sure:</p>
                     <ul>
-                        <li>Background App Refresh is enabled for Voice Reader</li>
+                        <li>Background App Refresh is enabled for ListenBook</li>
                         <li>Low Power Mode is disabled (it can interrupt background audio)</li>
                     </ul>
                 </div>
@@ -508,7 +621,7 @@
 
             <div class="faq-item">
                 <div class="faq-question" onclick="toggleFaq(this)">
-                    <h3>Does Voice Reader have a sleep timer?</h3>
+                    <h3>Does ListenBook have a sleep timer?</h3>
                     <div class="faq-toggle">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M6 9l6 6 6-6"/>
@@ -530,7 +643,7 @@
                     </div>
                 </div>
                 <div class="faq-answer">
-                    <p>Yes, Voice Reader supports multiple themes:</p>
+                    <p>Yes, ListenBook supports multiple themes:</p>
                     <ul>
                         <li><strong>Light:</strong> White background</li>
                         <li><strong>Sepia:</strong> Warm, paper-like background</li>
@@ -555,7 +668,7 @@
                     </div>
                 </div>
                 <div class="faq-answer">
-                    <p>Voice Reader currently supports <strong>EPUB</strong> format. This is the most common e-book format and is supported by most e-book stores.</p>
+                    <p>ListenBook currently supports <strong>EPUB</strong> format. This is the most common e-book format and is supported by most e-book stores.</p>
                     <p>PDF support may be added in a future update.</p>
                 </div>
             </div>
@@ -573,8 +686,8 @@
                     <p>There are several ways to import books:</p>
                     <ul>
                         <li>Tap the + button in your library and select from Files</li>
-                        <li>Open an EPUB file from Files app → Share → Voice Reader</li>
-                        <li>Download an EPUB from Safari → Open in Voice Reader</li>
+                        <li>Open an EPUB file from Files app → Share → ListenBook</li>
+                        <li>Download an EPUB from Safari → Open in ListenBook</li>
                     </ul>
                 </div>
             </div>
@@ -589,7 +702,7 @@
                     </div>
                 </div>
                 <div class="faq-answer">
-                    <p>No, Voice Reader only works with DRM-free EPUB files. Books purchased from most stores include DRM protection. You can find DRM-free books from:</p>
+                    <p>No, ListenBook only works with DRM-free EPUB files. Books purchased from most stores include DRM protection. You can find DRM-free books from:</p>
                     <ul>
                         <li>Project Gutenberg (free public domain books)</li>
                         <li>Standard Ebooks (free, beautifully formatted classics)</li>
@@ -613,7 +726,7 @@
     </div>
 
     <footer>
-        <p><a href="index.html">Voice Reader</a> · <a href="privacy.html">Privacy Policy</a> · <a href="support.html">Support</a></p>
+        <p><a href="index.html">ListenBook</a> · <a href="privacy.html">Privacy Policy</a> · <a href="support.html">Support</a></p>
     </footer>
 
     <script>
